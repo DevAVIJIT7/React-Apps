@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { pokemonApi } from '../services/pokemon'
 import { bookSlice } from '../services/bookSlice'
+import { postSlice } from '../services/postSlice'
 
 export const store = configureStore({
   // reducer: {
@@ -14,9 +15,10 @@ export const store = configureStore({
     // Add the generated reducer as a specific top-level slice
     [pokemonApi.reducerPath]: pokemonApi.reducer,
     [bookSlice.reducerPath]: bookSlice.reducer,
+    [postSlice.reducerPath]: postSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([pokemonApi.middleware, bookSlice.middleware]),
+    getDefaultMiddleware().concat([pokemonApi.middleware, bookSlice.middleware, postSlice.middleware]),
 });
 
 setupListeners(store.dispatch)
